@@ -128,9 +128,9 @@ TEST(TDynamicVector, can_add_scalar_to_vector)
 	}
 	TDynamicVector<int> res;
 	ASSERT_NO_THROW(res = v + 3);
-	for (int i = 0; i < 3; i++) {
-		ASSERT_EQ(v[i] + 3, res[i]);
-	}
+	TDynamicVector<int> true_res(3);
+	true_res[0] = 3;true_res[1] = 4;true_res[2] = 5;
+	ASSERT_EQ(res, true_res);
 }
 
 TEST(TDynamicVector, can_subtract_scalar_from_vector)
@@ -141,9 +141,9 @@ TEST(TDynamicVector, can_subtract_scalar_from_vector)
 	}
 	TDynamicVector<int> res;
 	ASSERT_NO_THROW(res = v - 3);
-	for (int i = 0; i < 3; i++) {
-		ASSERT_EQ(v[i] - 3, res[i]);
-	}
+	TDynamicVector<int> true_res(3);
+	true_res[0] = -3; true_res[1] = -2; true_res[2] = -1;
+	ASSERT_EQ(res, true_res);
 }
 
 TEST(TDynamicVector, can_multiply_scalar_by_vector)
@@ -154,20 +154,22 @@ TEST(TDynamicVector, can_multiply_scalar_by_vector)
 	}
 	TDynamicVector<int> res;
 	ASSERT_NO_THROW(res = v * 3);
-	for (int i = 0; i < 3; i++) {
-		ASSERT_EQ(v[i] * 3, res[i]);
-	}
+	TDynamicVector<int> true_res(3);
+	true_res[0] = 0; true_res[1] = 3; true_res[2] = 6;
+	ASSERT_EQ(res, true_res);
 }
 
 TEST(TDynamicVector, can_add_vectors_with_equal_size)
 {
 	TDynamicVector<int> v(3);
+	v[0] = 1; v[1] = 2; v[2] = 3;
 	TDynamicVector<int> v1(3);
+	v1[0] = 4; v1[1] = 5; v1[2] = 6;
 	TDynamicVector<int> res;
 	ASSERT_NO_THROW(res = v + v1);
-	for (int i = 0; i < 3; i++) {
-		ASSERT_EQ(v[i] + v1[i], res[i]);
-	}
+	TDynamicVector<int> true_res(3);
+	true_res[0] = 5; true_res[1] = 7; true_res[2] = 9;
+	ASSERT_EQ(res, true_res);
 }
 
 TEST(TDynamicVector, cant_add_vectors_with_not_equal_size)
@@ -180,12 +182,14 @@ TEST(TDynamicVector, cant_add_vectors_with_not_equal_size)
 TEST(TDynamicVector, can_subtract_vectors_with_equal_size)
 {
 	TDynamicVector<int> v(3);
+	v[0] = 5; v[1] = 7; v[2] = 9;
 	TDynamicVector<int> v1(3);
+	v1[0] = 4; v1[1] = 5; v1[2] = 6;
 	TDynamicVector<int> res;
 	ASSERT_NO_THROW(res = v - v1);
-	for (int i = 0; i < 3; i++) {
-		ASSERT_EQ(v[i] - v1[i], res[i]);
-	}
+	TDynamicVector<int> true_res(3);
+	true_res[0] = 1; true_res[1] = 2; true_res[2] = 3;
+	ASSERT_EQ(res, true_res);
 }
 
 TEST(TDynamicVector, cant_subtract_vectors_with_not_equal_size)
@@ -198,10 +202,13 @@ TEST(TDynamicVector, cant_subtract_vectors_with_not_equal_size)
 TEST(TDynamicVector, can_multiply_vectors_with_equal_size)
 {
 	TDynamicVector<int> v(3);
+	v[0] = 1; v[1] = 2; v[2] = 3;
 	TDynamicVector<int> v1(3);
+	v1[0] = 4; v1[1] = 5; v1[2] = 6;
 	int res;
 	ASSERT_NO_THROW(res = v * v1);
-	ASSERT_EQ(v * v1, res);
+	int true_res = 32;
+	ASSERT_EQ(res, true_res);
 }
 
 TEST(TDynamicVector, cant_multiply_vectors_with_not_equal_size)

@@ -120,16 +120,12 @@ TEST(TDynamicMatrix, can_add_matrices_with_equal_size)
 {
 	TDynamicMatrix<int> m1(2);
 	m1[0][0] = 1; m1[0][1] = 2; m1[1][0] = 3; m1[1][1] = 4;
-
 	TDynamicMatrix<int> m2(2);
 	m2[0][0] = 5; m2[0][1] = 6; m2[1][0] = 7; m2[1][1] = 8;
-
 	TDynamicMatrix<int> res = m1 + m2;
-
-	ASSERT_EQ(res[0][0], 6);
-	ASSERT_EQ(res[0][1], 8);
-	ASSERT_EQ(res[1][0], 10);
-	ASSERT_EQ(res[1][1], 12);
+	TDynamicMatrix<int> true_res(2);
+	true_res[0][0] = 6;  true_res[0][1] = 8;true_res[1][0] = 10; true_res[1][1] = 12;
+	ASSERT_EQ(res, true_res);
 }
 
 TEST(TDynamicMatrix, cant_add_matrices_with_not_equal_size)
@@ -146,13 +142,10 @@ TEST(TDynamicMatrix, can_subtract_matrices_with_equal_size)
 
 	TDynamicMatrix<int> m2(2);
 	m2[0][0] = 1; m2[0][1] = 2; m2[1][0] = 3; m2[1][1] = 4;
-
 	TDynamicMatrix<int> res = m1 - m2;
-
-	ASSERT_EQ(res[0][0], 4);
-	ASSERT_EQ(res[0][1], 4);
-	ASSERT_EQ(res[1][0], 4);
-	ASSERT_EQ(res[1][1], 4);
+	TDynamicMatrix<int> true_res(2);
+	true_res[0][0] = 4; true_res[0][1] = 4; true_res[1][0] = 4; true_res[1][1] = 4;
+	ASSERT_EQ(res, true_res);
 }
 
 TEST(TDynamicMatrix, cant_subtract_matrixes_with_not_equal_size)
